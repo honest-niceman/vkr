@@ -1,0 +1,1 @@
+create unique index IDX_VKR_PRODUCT_CATEGORY_UK_NAME on VKR_PRODUCT_CATEGORY (NAME) where DELETE_TS is null ;

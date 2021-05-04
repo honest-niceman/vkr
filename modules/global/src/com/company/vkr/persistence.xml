@@ -2,5 +2,18 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="vkr" transaction-type="RESOURCE_LOCAL">
 
+        <class>com.company.vkr.entity.users.CompanyCeo</class>
+        <class>com.company.vkr.entity.users.Customer</class>
+        <class>com.company.vkr.entity.users.NetworkCeo</class>
+        <class>com.company.vkr.entity.users.Manager</class>
+        <class>com.company.vkr.entity.company.Company</class>
+        <class>com.company.vkr.entity.company.Product</class>
+        <class>com.company.vkr.entity.company.ProductCategory</class>
+        <class>com.company.vkr.entity.network.Network</class>
+        <class>com.company.vkr.entity.network.Shop</class>
+        <class>com.company.vkr.entity.network.Address</class>
+        <class>com.company.vkr.entity.business.ProductInTheShop</class>
+        <class>com.company.vkr.entity.business.PurchasedProduct</class>
+        <class>com.company.vkr.entity.business.Purchase</class>
     </persistence-unit>
 </persistence>
