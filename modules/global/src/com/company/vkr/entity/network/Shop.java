@@ -1,6 +1,5 @@
 package com.company.vkr.entity.network;
 
-import com.company.vkr.entity.users.Manager;
 import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
@@ -9,6 +8,7 @@ import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,16 +35,16 @@ public class Shop extends StandardEntity {
     @JoinColumn(name = "NETWORK_ID")
     private Network network;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "MANAGER_ID")
-    @NotNull
-    private Manager manager;
+    private User manager;
 
-    public Manager getManager() {
+    public User getManager() {
         return manager;
     }
 
-    public void setManager(Manager manager) {
+    public void setManager(User manager) {
         this.manager = manager;
     }
 

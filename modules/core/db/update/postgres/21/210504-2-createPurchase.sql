@@ -1,2 +1,0 @@
-alter table VKR_PURCHASE add constraint FK_VKR_PURCHASE_ON_CUSTOMER foreign key (CUSTOMER_ID) references SEC_USER(ID);
-create index IDX_VKR_PURCHASE_ON_CUSTOMER on VKR_PURCHASE (CUSTOMER_ID);

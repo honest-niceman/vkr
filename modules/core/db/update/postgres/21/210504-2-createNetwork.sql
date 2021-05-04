@@ -1,2 +1,0 @@
-alter table VKR_NETWORK add constraint FK_VKR_NETWORK_ON_NETWORK_CEO foreign key (NETWORK_CEO_ID) references SEC_USER(ID);
-create index IDX_VKR_NETWORK_ON_NETWORK_CEO on VKR_NETWORK (NETWORK_CEO_ID);

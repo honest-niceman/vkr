@@ -1,2 +1,0 @@
-alter table VKR_COMPANY add constraint FK_VKR_COMPANY_ON_COMPANY_CEO foreign key (COMPANY_CEO_ID) references SEC_USER(ID);
-create index IDX_VKR_COMPANY_ON_COMPANY_CEO on VKR_COMPANY (COMPANY_CEO_ID);

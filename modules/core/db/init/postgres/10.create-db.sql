@@ -11,7 +11,7 @@ create table VKR_PURCHASE (
     --
     TOTAL_PRICE decimal(19, 2),
     DATE_ timestamp,
-    CUSTOMER_ID uuid,
+    CUSTOMER_ID uuid not null,
     --
     primary key (ID)
 )^
@@ -138,7 +138,7 @@ create table VKR_COMPANY (
     DELETED_BY varchar(50),
     --
     NAME varchar(63),
-    COMPANY_CEO_ID uuid,
+    COMPANY_CEO_ID uuid not null,
     --
     primary key (ID)
 )^
@@ -163,7 +163,3 @@ create table VKR_ADDRESS (
     primary key (ID)
 )^
 -- end VKR_ADDRESS
--- begin SEC_USER
-alter table SEC_USER add column DTYPE varchar(31) ^
-update SEC_USER set DTYPE = 'sec$User' where DTYPE is null ^
--- end SEC_USER

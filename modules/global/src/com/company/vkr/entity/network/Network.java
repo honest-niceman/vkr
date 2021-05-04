@@ -1,10 +1,10 @@
 package com.company.vkr.entity.network;
 
-import com.company.vkr.entity.users.NetworkCeo;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -23,16 +23,16 @@ public class Network extends StandardEntity {
     @OneToMany(mappedBy = "network")
     private List<Shop> shops;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "NETWORK_CEO_ID")
-    @NotNull
-    private NetworkCeo networkCeo;
+    private User networkCeo;
 
-    public NetworkCeo getNetworkCeo() {
+    public User getNetworkCeo() {
         return networkCeo;
     }
 
-    public void setNetworkCeo(NetworkCeo networkCeo) {
+    public void setNetworkCeo(User networkCeo) {
         this.networkCeo = networkCeo;
     }
 
