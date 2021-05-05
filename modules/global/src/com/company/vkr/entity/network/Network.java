@@ -1,5 +1,6 @@
 package com.company.vkr.entity.network;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
@@ -21,6 +22,7 @@ public class Network extends StandardEntity {
 
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "network")
+    @Composition
     private List<Shop> shops;
 
     @NotNull

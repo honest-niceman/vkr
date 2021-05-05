@@ -1,4 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
+    <view entity="vkr_Network" name="network-view" extends="_local">
+        <property name="shops" view="_minimal">
+            <property name="address" view="_minimal">
+                <property name="country"/>
+                <property name="city"/>
+                <property name="street"/>
+                <property name="number"/>
+            </property>
+            <property name="manager" view="_minimal">
+                <property name="firstName"/>
+                <property name="lastName"/>
+                <property name="email"/>
+            </property>
+        </property>
+        <property name="networkCeo" view="_minimal">
+            <property name="firstName"/>
+            <property name="lastName"/>
+            <property name="email"/>
+        </property>
+    </view>
+    <view entity="vkr_Shop" name="shop-view" extends="_local">
+        <property name="address" view="_minimal">
+            <property name="country"/>
+            <property name="city"/>
+            <property name="street"/>
+            <property name="number"/>
+        </property>
+        <property name="network" view="_minimal"/>
+        <property name="manager" view="_minimal">
+            <property name="firstName"/>
+            <property name="lastName"/>
+            <property name="email"/>
+        </property>
+    </view>
 </views>

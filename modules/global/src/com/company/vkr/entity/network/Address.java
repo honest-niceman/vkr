@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Table(name = "VKR_ADDRESS")
 @Entity(name = "vkr_Address")
-@NamePattern("%s %s|id,postalCode")
+@NamePattern("%s %s %s %s %s|country,city,street,number,postalCode")
 public class Address extends StandardEntity {
     private static final long serialVersionUID = 5169277641646417463L;
 
