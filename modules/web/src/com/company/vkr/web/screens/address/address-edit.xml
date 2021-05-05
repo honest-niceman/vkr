@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://addressEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.vkr.web.screens.address">
+
+    <data>
+        <instance id="addressDc"
+                  class="com.company.vkr.entity.network.Address">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+
+    <dialogMode height="AUTO"
+                width="AUTO"
+                forceDialog="true"/>
+
+    <layout expand="editActions" spacing="true">
+
+        <form id="form" dataContainer="addressDc">
+            <column width="350px">
+                <textField id="countryField" property="country"/>
+                <textField id="cityField" property="city"/>
+                <textField id="streetField" property="street"/>
+                <textField id="numberField" property="number"/>
+                <textField id="postalCodeField" property="postalCode"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+
+    </layout>
+
+</window>

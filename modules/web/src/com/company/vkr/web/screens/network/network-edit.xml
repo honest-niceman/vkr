@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://networkEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.vkr.web.screens.network">
+    <data>
+        <instance id="networkDc"
+                  class="com.company.vkr.entity.network.Network">
+            <view extends="network-view"/>
+            <loader/>
+        </instance>
+
+        <collection id="shopsDc"
+                    class="com.company.vkr.entity.network.Shop">
+            <view extends="shop-view"/>
+            <loader id="shopsDl">
+                <query>
+                    <![CDATA[select e from vkr_Shop e where e.network = :network]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="networkDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+                <pickerField id="networkCeoField"
+                           property="networkCeo"
+                           editable="false">
+                </pickerField>
+            </column>
+        </form>
+        <label height="30px"/>
+        <label value="msg://networkShops"/>
+        <groupTable id="shopsTable"
+                    width="100%"
+                    height="400px"
+                    dataContainer="shopsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="address.country"/>
+                <column id="address.city"/>
+                <column id="address.street"/>
+                <column id="address.number"/>
+                <column id="address.postalCode"/>
+                <column id="manager"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        caption="msg://createBtn"
+                        icon="CREATE_ACTION"/>
+                <button id="editBtn" action="shopsTable.edit"/>
+                <button id="removeBtn" action="shopsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

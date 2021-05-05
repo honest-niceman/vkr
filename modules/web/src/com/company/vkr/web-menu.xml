@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application-vkr" insertBefore="administration" caption="mainMsg://menu_config.application-vkr">
+        <item screen="vkr_Network.browse" caption="mainMsg://menu_config.vkr_Network.browse"/>
     </menu>
 </menu-config>
