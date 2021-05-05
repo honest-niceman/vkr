@@ -3,13 +3,10 @@ buildscript {
     ext.cubaVersion = '7.2.13'
     repositories {
         maven {
-            url 'https://repo.cuba-platform.com/content/groups/work'
+            url 'https://dl.bintray.com/cuba-platform/main'
 
-            credentials {
-                username(rootProject.hasProperty('repoUser') ? rootProject['repoUser'] : 'cuba')
-                password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
-            }
         }
+        jcenter()
 
 
     }
@@ -48,10 +45,10 @@ configure([globalModule, coreModule, webModule]) {
     apply(plugin: 'cuba')
 
     dependencies {
-            testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
-            testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
-            testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')  
-        }
+        testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
+        testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
+        testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
+    }
 
     task sourceJar(type: Jar) {
         from file('src')
@@ -60,7 +57,7 @@ configure([globalModule, coreModule, webModule]) {
 
     artifacts {
         archives sourceJar
-    } 
+    }
     test {
         useJUnitPlatform()
     }
@@ -169,4 +166,3 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
     }
 }
 restart.finalizedBy start
-
