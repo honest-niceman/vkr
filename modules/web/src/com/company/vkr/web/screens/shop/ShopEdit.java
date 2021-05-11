@@ -1,10 +1,7 @@
 package com.company.vkr.web.screens.shop;
 
 import com.company.vkr.entity.network.Address;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.MetadataTools;
-import com.haulmont.cuba.gui.ScreenBuilders;
-import com.haulmont.cuba.gui.components.Action;
 import com.haulmont.cuba.gui.components.SuggestionPickerField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -56,7 +53,9 @@ public class ShopEdit extends StandardEditor<Shop> {
     }
 
     public void managersLoaderSearchExecutor(){
-        UUID managerGroup = UUID.fromString("daed0d15-c513-c70b-2893-a67ca0895522");
+        //todo change query to select users with role manager
+        //UUID managerGroup = UUID.fromString("daed0d15-c513-c70b-2893-a67ca0895522"); // manager group id
+        UUID managerGroup = UUID.fromString("0fa2b1a5-1d68-4d69-9fbd-dff348347f93"); // company group id, just for testing
         managersLoader.setQuery("select u from sec$User u where u.group.id = :group");
         managersLoader.setParameter("group",managerGroup);
         managersLoader.load();

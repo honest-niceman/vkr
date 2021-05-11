@@ -10,7 +10,7 @@
             <view extends="network-view"/>
             <loader id="networksDl">
                 <query>
-                    <![CDATA[select e from vkr_Network e]]>
+                    <![CDATA[select e from vkr_Network e where e.networkCeo = :networkCeo]]>
                 </query>
             </loader>
         </collection>
