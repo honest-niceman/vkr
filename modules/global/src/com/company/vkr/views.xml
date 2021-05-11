@@ -35,4 +35,32 @@
             <property name="email"/>
         </property>
     </view>
+    <view entity="vkr_Shop" name="shop-view-with-products" extends="_minimal">
+        <property name="products" view="_minimal">
+            <property name="product">
+                <property name="count"/>
+                <property name="price"/>
+                <property name="category" view="_minimal"/>
+                <property name="company" view="_minimal"/>
+            </property>
+            <property name="price"/>
+            <property name="count"/>
+        </property>
+    </view>
+    <view entity="vkr_ProductInTheShop" name="productInTheShop-view" extends="_base">
+        <property name="product" view="_minimal">
+            <property name="count"/>
+            <property name="price"/>
+            <property name="category" view="_minimal"/>
+        </property>
+        <property name="shop" view="_minimal">
+            <property name="products" view="_minimal">
+                <property name="price"/>
+                <property name="count"/>
+            </property>
+            <property name="address" view="_minimal"/>
+            <property name="network" view="_minimal"/>
+            <property name="manager" view="_minimal"/>
+        </property>
+    </view>
 </views>
