@@ -1,4 +1,4 @@
-package com.company.vkr.web.screens.shop;
+package com.company.vkr.web.screens.shop.ceo;
 
 import com.company.vkr.entity.network.Address;
 import com.haulmont.cuba.core.global.MetadataTools;

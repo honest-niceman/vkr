@@ -1,20 +1,16 @@
 package com.company.vkr.web.screens.network;
 
-import com.company.vkr.entity.network.Address;
 import com.company.vkr.entity.network.Shop;
-import com.company.vkr.web.screens.shop.ShopEdit;
+import com.company.vkr.web.screens.shop.ceo.ShopEdit;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.GroupTable;
-import com.haulmont.cuba.gui.components.PickerField;
-import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 import com.company.vkr.entity.network.Network;
-import com.haulmont.cuba.security.entity.User;
 
 import javax.inject.Inject;
 
