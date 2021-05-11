@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://companyBrowse.caption"
+        focusComponent="companiesTable"
+        messagesPack="com.company.vkr.web.screens.company">
+    <data readOnly="true">
+        <collection id="companiesDc"
+                    class="com.company.vkr.entity.company.Company">
+            <view extends="_local">
+                <property name="products" view="_minimal">
+                    <property name="count"/>
+                    <property name="price"/>
+                    <property name="category" view="_minimal"/>
+                    <property name="company" view="_minimal"/>
+                </property>
+                <property name="companyCeo" view="_minimal"/>
+            </view>
+            <loader id="companiesDl">
+                <query>
+                    <![CDATA[select e from vkr_Company e where e.companyCeo = :companyCeo]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="companiesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="companiesTable"
+                dataLoader="companiesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="companiesTable"
+                    width="100%"
+                    dataContainer="companiesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="name"/>
+                <column id="companyCeo"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="companiesTable.create"/>
+                <button id="editBtn" action="companiesTable.edit"/>
+                <button id="removeBtn" action="companiesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
