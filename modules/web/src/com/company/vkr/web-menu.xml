@@ -3,5 +3,6 @@
     <menu id="application-vkr" insertBefore="administration" caption="mainMsg://menu_config.application-vkr">
         <item screen="vkr_Network.browse" caption="mainMsg://menu_config.vkr_Network.browse"/>
         <item screen="vkr_Company.browse" caption="mainMsg://menu_config.vkr_Company.browse"/>
+        <item screen="vkr_manage_Shop.browse" caption="mainMsg://menu_config.vkr_manage_Shop.browse"/>
     </menu>
 </menu-config>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://managerShopEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.vkr.web.screens.shop.manager">
+    <data>
+        <instance id="shopDc"
+                  class="com.company.vkr.entity.network.Shop">
+            <view extends="_local">
+                <property name="address" view="_minimal"/>
+                <property name="network" view="_minimal">
+                    <property name="networkCeo" view="_minimal"/>
+                </property>
+                <property name="manager" view="_minimal"/>
+                <property name="products" view="_minimal">
+                    <property name="price"/>
+                    <property name="count"/>
+                </property>
+            </view>
+            <loader/>
+            <instance id="addressDc" property="address"/>
+        </instance>
+
+        <collection id="productsInTheShopDc"
+                    class="com.company.vkr.entity.business.ProductInTheShop">
+            <view extends="_local">
+                <property name="product" view="_minimal">
+                    <property name="category" view="_minimal"/>
+                    <property name="company" view="_minimal"/>
+                </property>
+                <property name="shop" view="_minimal"/>
+            </view>
+            <loader id="productsInTheShop">
+                <query>
+                    <![CDATA[select e from vkr_ProductInTheShop e where e.shop = :shop]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="addressesDc"
+                    class="com.company.vkr.entity.network.Address"
+                    view="_local">
+            <loader id="addressesLoader">
+                <query><![CDATA[select c from vkr_Address c]]></query>
+            </loader>
+        </collection>
+
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="shopDc">
+            <column width="350px">
+                <textField id="nameField" property="name" editable="false"/>
+                <suggestionPickerField id="addressField" property="address">
+                    <actions>
+                        <action id="open_composition" type="picker_open_composition"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </suggestionPickerField>
+            </column>
+        </form>
+        <label height="30px"/>
+        <groupTable id="productsInTheShopTable"
+                    width="100%"
+                    height="400px"
+                    dataContainer="productsInTheShopDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="product.name"/>
+                <column id="product.category"/>
+                <column id="product.company.name"/>
+                <column id="price"/>
+                <column id="count"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        caption="msg://createBtn"
+                        icon="CREATE_ACTION"/>
+                <button id="editBtn"
+                        caption="msg://editBtn"
+                        icon="EDIT_ACTION"/>
+                <button id="removeBtn"
+                        caption="msg://removeBtn"
+                        icon="REMOVE_ACTION"/>
+            </buttonsPanel>
+        </groupTable>
+
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
