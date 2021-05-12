@@ -5,7 +5,6 @@ import com.company.vkr.entity.company.Product;
 import com.company.vkr.entity.network.Shop;
 import com.haulmont.cuba.core.app.events.EntityChangedEvent;
 import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.EntityStates;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
@@ -90,6 +89,7 @@ public class ProductInTheShopChangedListener {
                 if(!existedProduct.equals(newProductInTheShop)){
                     Integer existedCount = existedProduct.getCount();
                     existedProduct.setCount(existedCount + newProductInTheShop.getCount());
+                    existedProduct.setPrice(newProductInTheShop.getPrice());
 
                     dataManager.remove(newProductInTheShop);
                     dataManager.commit(existedProduct);
