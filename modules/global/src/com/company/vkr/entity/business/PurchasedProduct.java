@@ -2,12 +2,14 @@ package com.company.vkr.entity.business;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
+@PublishEntityChangedEvents
 @Table(name = "VKR_PURCHASED_PRODUCT")
 @Entity(name = "vkr_PurchasedProduct")
 @NamePattern("%s %s|purchase,productInTheShop")
