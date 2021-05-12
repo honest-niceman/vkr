@@ -10,7 +10,6 @@ import com.haulmont.cuba.gui.components.SuggestionPickerField;
 import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
-import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 import com.company.vkr.entity.business.ProductInTheShop;
 import org.apache.commons.lang3.StringUtils;
@@ -39,6 +38,8 @@ public class ProductInTheShopEdit extends StandardEditor<ProductInTheShop> {
     private CollectionLoader<Product> productsDl;
 
     private Integer oldCount;
+    @Inject
+    private DataManager dataManager;
 
     @Subscribe
     public void onInit(InitEvent event) {
@@ -65,6 +66,28 @@ public class ProductInTheShopEdit extends StandardEditor<ProductInTheShop> {
                 event.preventCommit();
             }
         }
+
+        if(!new EntityStates().isNew(getEditedEntity())){
+            updateCountOfTheProduct(getEditedEntity());
+        }
+    }
+
+    private void updateCountOfTheProduct(ProductInTheShop notCommitedEntity) {
+        ProductInTheShop productInTheShop = dataManager.load(ProductInTheShop.class).id(notCommitedEntity.getId()).one();
+        Product product = dataManager.load(Product.class).id(productInTheShop.getProduct().getId()).one();
+
+        Integer productCount = product.getCount();
+
+        Integer newCount = notCommitedEntity.getCount();
+        Integer oldCount = productInTheShop.getCount();
+
+        if (newCount > oldCount) {
+            product.setCount(productCount - (newCount - oldCount));
+        } else if (newCount < oldCount) {
+            product.setCount(productCount + (oldCount - newCount));
+        }
+
+        dataManager.commit(product);
     }
 
     private boolean isEnoughProducts(Product product, Integer wantedValue) {

@@ -24,8 +24,6 @@ public class ProductInTheShopChangedListener {
         if (event.getType().equals(EntityChangedEvent.Type.CREATED)) {
             reduceCountOfTheProduct(event);
             mergeProductsInTheShop(event);
-        } else if (event.getType().equals(EntityChangedEvent.Type.UPDATED)) {
-            updateCountOfTheProduct(event);
         }
     }
 
@@ -34,24 +32,6 @@ public class ProductInTheShopChangedListener {
         if (event.getType().equals(EntityChangedEvent.Type.DELETED)) {
             increaseCountOfTheProduct(event);
         }
-    }
-
-    private void updateCountOfTheProduct(EntityChangedEvent<ProductInTheShop, UUID> event) {
-        UUID uuid = event.getEntityId().getValue();
-        ProductInTheShop productInTheShop = dataManager.load(ProductInTheShop.class).id(uuid).one();
-        Product product = dataManager.load(Product.class).id(productInTheShop.getProduct().getId()).one();
-
-        Integer oldCount = product.getCount();
-
-        Integer oldProductInTheShopCount = (Integer) event.getChanges().getOldValue("count");
-
-        if (oldProductInTheShopCount < product.getCount()) {
-            product.setCount(oldCount - (productInTheShop.getCount() - oldProductInTheShopCount));
-        } else if (oldProductInTheShopCount > product.getCount()) {
-            product.setCount(oldCount + (oldProductInTheShopCount - productInTheShop.getCount()));
-        }
-
-        dataManager.commit(product);
     }
 
     private void increaseCountOfTheProduct(EntityChangedEvent<ProductInTheShop, UUID> event) {
