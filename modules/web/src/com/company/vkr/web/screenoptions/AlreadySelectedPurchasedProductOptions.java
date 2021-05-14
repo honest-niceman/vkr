@@ -1,15 +1,18 @@
 package com.company.vkr.web.screenoptions;
 
+import com.company.vkr.entity.business.PurchasedProduct;
 import com.haulmont.cuba.gui.screen.ScreenOptions;
 
-public class AlreadySelectedPurchasedProductOptions implements ScreenOptions {
-    private StringBuilder purchasedProducts;
+import java.util.Collection;
 
-    public AlreadySelectedPurchasedProductOptions(StringBuilder purchasedProducts) {
+public class AlreadySelectedPurchasedProductOptions implements ScreenOptions {
+    private Collection<PurchasedProduct> purchasedProducts;
+
+    public AlreadySelectedPurchasedProductOptions(Collection<PurchasedProduct> purchasedProducts) {
         this.purchasedProducts = purchasedProducts;
     }
 
-    public StringBuilder getPurchasedProducts() {
+    public Collection<PurchasedProduct> getPurchasedProducts() {
         return purchasedProducts;
     }
 }

@@ -17,7 +17,6 @@ import com.company.vkr.entity.business.Purchase;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -28,8 +27,6 @@ import java.util.List;
 public class PurchaseEdit extends StandardEditor<Purchase> {
     @Inject
     private TextField<BigDecimal> totalPriceField;
-    @Inject
-    private DateField<Date> dateField;
     @Inject
     private CollectionLoader<PurchasedProduct> purchasedProductsDl;
     @Inject
@@ -49,6 +46,8 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
         if(!new EntityStates().isNew(getEditedEntity())){
             buttonsPanel.setVisible(false);
         }
+
+        getEditedEntity().setDate(AppBeans.get(TimeSource.class).currentTimestamp());
     }
 
     private BigDecimal calculateTotalPrice() {
@@ -60,11 +59,6 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
             }
         }
         return totalPrice;
-    }
-
-    @Subscribe
-    public void onInit(InitEvent event) {
-        dateField.setValue(AppBeans.get(TimeSource.class).currentTimestamp());
     }
 
     @Subscribe
@@ -80,7 +74,7 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
                     .withInitializer(purchasedProduct -> {          // lambda to initialize new instance
                         purchasedProduct.setPurchase(getEditedEntity());
                     })
-                    .withOptions(new AlreadySelectedPurchasedProductOptions(getAllSelectedProductsNames(purchasedProductsTable.getItems().getItems())))
+                    .withOptions(new AlreadySelectedPurchasedProductOptions(purchasedProductsTable.getItems().getItems()))
                     .withParentDataContext(dataContext)
                     .withScreenClass(PurchasedProductEdit.class)    // specific editor screen
                     .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
@@ -92,29 +86,6 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
         }
     }
 
-    private StringBuilder getAllSelectedProductsNames(Collection<PurchasedProduct> products){
-        StringBuilder stringBuilder = new StringBuilder();
-
-        if(products.size()!=0){
-            Object[] productArray = products.toArray();
-
-            if(productArray.length==1){
-                stringBuilder.append(((PurchasedProduct)productArray[0]).getProductInTheShop().getProduct().getName());
-            } else {
-                for (int i = 0; i < productArray.length; i++) {
-                    if(productArray[i] instanceof PurchasedProduct){
-                        if (i == 0) {
-                            stringBuilder.append(((PurchasedProduct)productArray[i]).getProductInTheShop().getProduct().getName()).append(", ");
-                        } else {
-                            stringBuilder.append(", ").append(((PurchasedProduct)productArray[i]).getProductInTheShop().getProduct().getName());
-                        }
-                    }
-                }
-            }
-        }
-        return stringBuilder;
-    }
-
     @Subscribe("editBtn")
     public void onEditBtnClick(Button.ClickEvent event) {
         if(purchasedProductsTable.getSingleSelected()!=null){
@@ -124,7 +95,7 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
                         .withInitializer(purchasedProduct -> {          // lambda to initialize new instance
                             purchasedProduct.setPurchase(getEditedEntity());
                         })
-                        .withOptions(new AlreadySelectedPurchasedProductOptions(getAllSelectedProductsNames(purchasedProductsTable.getItems().getItems())))
+                        .withOptions(new AlreadySelectedPurchasedProductOptions(purchasedProductsTable.getItems().getItems()))
                         .withParentDataContext(dataContext)
                         .withScreenClass(PurchasedProductEdit.class)    // specific editor screen
                         .withLaunchMode(OpenMode.DIALOG)        // open as modal dialog
