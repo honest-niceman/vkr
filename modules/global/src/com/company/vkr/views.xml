@@ -63,4 +63,8 @@
             <property name="manager" view="_minimal"/>
         </property>
     </view>
+    <view entity="vkr_PurchasedProduct" name="purchasedProduct-view-shop" extends="_local">
+        <property name="productInTheShop" view="_minimal"/>
+        <property name="shop" view="_minimal"/>
+    </view>
 </views>

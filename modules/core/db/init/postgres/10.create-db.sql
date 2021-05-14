@@ -28,6 +28,8 @@ create table VKR_PURCHASED_PRODUCT (
     DELETED_BY varchar(50),
     --
     PRODUCT_IN_THE_SHOP_ID uuid not null,
+    POSITION_PRICE decimal(19, 2),
+    SHOP_ID uuid not null,
     COUNT_ integer,
     PRICE decimal(19, 2),
     PURCHASE_ID uuid not null,
