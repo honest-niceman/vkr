@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd"
+        caption="msg://salesScreen.caption"
+        messagesPack="com.company.vkr.web.screens.analytics.sales">
+    <data readOnly="true">
+        <collection id="purchasedProductsDc"
+                    class="com.company.vkr.entity.business.PurchasedProduct">
+            <view extends="purchasedProduct-view-shop"/>
+            <loader id="purchasedProductsDl">
+                <query>
+                    <![CDATA[select e from vkr_PurchasedProduct e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="shopStatisticDc"
+                    class="com.company.vkr.entity.analytics.ShopStatistic"
+                    view="_local"/>
+    </data>
+    <layout>
+        <vbox spacing="true" margin="true">
+            <label value="msg://mostSoldByQuantity" height="50px"/>
+            <chart:serialChart id="columnChart"
+                               addClassNames="true"
+                               categoryField="shop"
+                               dataContainer="shopStatisticDc"
+                               startDuration="1"
+                               theme="LIGHT"
+                               width="100%">
+                <chart:valueAxes>
+                    <chart:axis axisAlpha="0"
+                                position="LEFT"/>
+                </chart:valueAxes>
+                <chart:balloon adjustBorderColor="false"
+                               color="WHITE"
+                               horizontalPadding="10"
+                               verticalPadding="8"/>
+                <chart:graphs>
+                    <chart:graph fillAlphas="1"
+                                 title="Purchased products"
+                                 type="COLUMN"
+                                 valueField="totalPurchasedProducts"/>
+                </chart:graphs>
+                <chart:categoryAxis axisAlpha="0"
+                                    gridPosition="START"
+                                    tickLength="0"/>
+                <chart:export/>
+            </chart:serialChart>
+        </vbox>
+    </layout>
+</window>

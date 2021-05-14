@@ -49,8 +49,7 @@
                 <textField id="nameField" property="name"/>
 
                 <suggestionPickerField id="addressField"
-                                       property="address"
-                                       minSearchStringLength="5">
+                                       property="address">
                     <actions>
                         <action id="open_composition"
                                 type="picker_open_composition"
@@ -60,8 +59,7 @@
                 </suggestionPickerField>
 
                 <suggestionPickerField id="managerField"
-                                       property="manager"
-                                       minSearchStringLength="3">
+                                       property="manager">
                     <actions>
                         <action id="clear" type="picker_clear"/>
                     </actions>

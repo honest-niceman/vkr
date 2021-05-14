@@ -37,7 +37,7 @@
         <groupTable id="shopsTable"
                     width="100%"
                     height="400px"
-                    dataContainer="shopsDc">
+                    dataContainer="shopsDc" multiselect="true">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>

@@ -13,13 +13,14 @@ import com.haulmont.cuba.gui.screen.*;
 import com.company.vkr.entity.business.PurchasedProduct;
 
 import javax.inject.Inject;
+import java.util.Collection;
 
 @UiController("vkr_PurchasedProduct.edit")
 @UiDescriptor("purchased-product-edit.xml")
 @EditedEntityContainer("purchasedProductDc")
 @LoadDataBeforeShow
 public class PurchasedProductEdit extends StandardEditor<PurchasedProduct> {
-    private StringBuilder alreadySelectedProductsNames;
+    private Collection<PurchasedProduct> alreadySelectedProductsNames;
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
@@ -66,6 +67,8 @@ public class PurchasedProductEdit extends StandardEditor<PurchasedProduct> {
                                 + productInTheShopField.getValue().getCount())
                         .show();
                 event.preventCommit();
+            } else {
+                getEditedEntity().setShop(productInTheShopField.getValue().getShop());
             }
         }
     }
