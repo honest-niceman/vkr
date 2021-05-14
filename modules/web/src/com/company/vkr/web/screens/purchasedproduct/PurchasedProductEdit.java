@@ -13,13 +13,15 @@ import com.haulmont.cuba.gui.screen.*;
 import com.company.vkr.entity.business.PurchasedProduct;
 
 import javax.inject.Inject;
+import java.util.Collection;
+import java.util.Random;
 
 @UiController("vkr_PurchasedProduct.edit")
 @UiDescriptor("purchased-product-edit.xml")
 @EditedEntityContainer("purchasedProductDc")
 @LoadDataBeforeShow
 public class PurchasedProductEdit extends StandardEditor<PurchasedProduct> {
-    private StringBuilder alreadySelectedProductsNames;
+    private Collection<PurchasedProduct> alreadySelectedProductsNames;
     @Inject
     private ScreenBuilders screenBuilders;
     @Inject
@@ -46,10 +48,22 @@ public class PurchasedProductEdit extends StandardEditor<PurchasedProduct> {
                 .show();
     }
 
+    Random random = new Random();
+
     @Subscribe("productInTheShopField")
     public void onProductInTheShopFieldValueChange(HasValue.ValueChangeEvent<ProductInTheShop> event) {
-        if(event.getValue()!=null){
+        if (event.getValue() != null) {
             getEditedEntity().setPrice(event.getValue().getPrice());
+            int count = event.getValue().getCount();
+            if (count > 1_000) {
+                getEditedEntity().setCount(count / (10 + random.nextInt(10)));
+            } else if(count>100){
+                getEditedEntity().setCount(count/(1 + random.nextInt(10)));
+            } else if(count>10){
+                getEditedEntity().setCount(count / 2);
+            } else {
+                getEditedEntity().setCount(count);
+            }
         }
     }
 

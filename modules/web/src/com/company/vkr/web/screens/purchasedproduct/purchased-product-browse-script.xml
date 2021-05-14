@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://purchasedProductBrowseScript.caption"
+        focusComponent="purchasedProductsTable"
+        messagesPack="com.company.vkr.web.screens.purchasedproduct">
+    <data readOnly="true">
+        <collection id="purchasedProductsDc"
+                    class="com.company.vkr.entity.business.PurchasedProduct">
+            <view extends="_local">
+                <property name="productInTheShop" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
+                <property name="purchase" view="_minimal"/>
+            </view>
+            <loader id="purchasedProductsDl">
+                <query>
+                    <![CDATA[select e from vkr_PurchasedProduct e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="purchasedProductsTable"
+            spacing="true">
+        <textArea id="textArea"/>
+        <filter id="filter"
+                applyTo="purchasedProductsTable"
+                dataLoader="purchasedProductsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="purchasedProductsTable"
+                    width="100%"
+                    dataContainer="purchasedProductsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="productInTheShop"/>
+                <column id="positionPrice"/>
+                <column id="shop"/>
+                <column id="count"/>
+                <column id="price"/>
+                <column id="purchase"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="purchasedProductsTable.create"/>
+                <button id="editBtn" action="purchasedProductsTable.edit"/>
+                <button id="removeBtn" action="purchasedProductsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

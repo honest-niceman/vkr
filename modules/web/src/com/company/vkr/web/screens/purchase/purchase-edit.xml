@@ -13,32 +13,13 @@
             <loader/>
         </instance>
 
-        <collection id="networksDc"
-                    class="com.company.vkr.entity.network.Network">
-            <view extends="network-view"/>
-            <loader id="networksDl">
-                <query>
-                    <![CDATA[select e from vkr_Network e]]>
-                </query>
-            </loader>
-        </collection>
-
-        <collection id="shopsDc"
-                    class="com.company.vkr.entity.network.Shop">
-            <view extends="_local"/>
-            <loader id="shopsDl">
-                <query>
-                    <![CDATA[select e from vkr_Shop e]]>
-                </query>
-            </loader>
-        </collection>
 
         <collection id="productsInTheShopDc"
                     class="com.company.vkr.entity.business.ProductInTheShop">
-            <view extends="_local"/>
+            <view extends="productInTheShop-view"/>
             <loader id="productsInTheShopDl">
                 <query>
-                    <![CDATA[select e from vkr_ProductInTheShop e]]>
+                    <![CDATA[select e from vkr_ProductInTheShop e where e.count > 0]]>
                 </query>
             </loader>
         </collection>
@@ -47,6 +28,7 @@
                     class="com.company.vkr.entity.business.PurchasedProduct">
             <view extends="_local">
                 <property name="productInTheShop" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
             </view>
             <loader id="purchasedProductsDl">
                 <query>
@@ -75,9 +57,11 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
+                <column id="shop"/>
                 <column id="productInTheShop.product.name"/>
                 <column id="price"/>
                 <column id="count"/>
+                <column id="positionPrice"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
