@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://shopEarnings.caption"
+        focusComponent="shopsTable"
+        messagesPack="com.company.vkr.web.screens.analytics.earnings">
+    <data readOnly="true">
+        <collection id="shopsDc"
+                    class="com.company.vkr.entity.network.Shop">
+            <view extends="_local"/>
+            <loader id="shopsDl">
+                <query>
+                    <![CDATA[select e from vkr_Shop e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="purchasedProductsDc"
+                    class="com.company.vkr.entity.business.PurchasedProduct">
+            <view extends="_local">
+                <property name="productInTheShop" view="_minimal"/>
+            </view>
+            <loader id="purchasedProductsDl">
+                <query>
+                    <![CDATA[select e from vkr_PurchasedProduct e where e.shop = :shop]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="shopEarningsDc"
+                    class="com.company.vkr.entity.analytics.ShopEarnings"
+                    view="_local"/>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <split orientation="horizontal">
+            <vbox width="20%">
+                <filter id="filter"
+                        applyTo="shopsTable"
+                        dataLoader="shopsDl">
+                    <properties include=".*"/>
+                </filter>
+                <groupTable id="shopsTable"
+                            width="100%"
+                            dataContainer="shopsDc">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="name"/>
+                    </columns>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn" action="shopsTable.create"/>
+                        <button id="editBtn" action="shopsTable.edit"/>
+                        <button id="removeBtn" action="shopsTable.remove"/>
+                    </buttonsPanel>
+                </groupTable>
+            </vbox>
+            <vbox width="80%">
+                <chart:serialChart id="lineChart"
+                                   autoMarginOffset="20"
+                                   categoryField="date"
+                                   dataContainer="shopEarningsDc"
+                                   height="100%"
+                                   marginRight="40"
+                                   marginLeft="40"
+                                   mouseWheelZoomEnabled="true"
+                                   theme="LIGHT"
+                                   width="100%">
+                    <chart:valueAxes>
+                        <chart:axis id="v1"
+                                    axisAlpha="0"
+                                    ignoreAxisWidth="true"
+                                    position="LEFT"/>
+                    </chart:valueAxes>
+                    <chart:balloon borderThickness="1"
+                                   shadowAlpha="0"/>
+                    <chart:graphs>
+                        <chart:graph id="g1"
+                                     bullet="ROUND"
+                                     bulletBorderAlpha="1"
+                                     bulletBorderColor="WHITE"
+                                     hideBulletsCount="50"
+                                     lineThickness="2"
+                                     useNegativeColorIfDown="true"
+                                     negativeLineColor="YELLOWGREEN"
+                                     valueField="profit"
+                                     balloonText="&lt;span style='font-size:18px;'&gt;[[value]]&lt;/span&gt;">
+                            <chart:balloon adjustBorderColor="false"
+                                           color="WHITE"
+                                           drop="true"/>
+                        </chart:graph>
+                    </chart:graphs>
+                    <chart:categoryAxis dashLength="1"
+                                        minorGridEnabled="true"/>
+                    <chart:chartCursor cursorAlpha="1"
+                                       cursorColor="#258cbb"
+                                       cursorPosition="MOUSE"
+                                       limitToGraph="g1"
+                                       pan="true"
+                                       valueLineAlpha="0.2"
+                                       valueLineEnabled="true"
+                                       valueLineBalloonEnabled="true"
+                                       valueZoomable="true"/>
+                    <chart:export/>
+                </chart:serialChart>
+            </vbox>
+        </split>
+
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
