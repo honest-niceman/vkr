@@ -1,0 +1,1 @@
+drop table if exists VKR_SHOP_STATISTIC__U88678 cascade ;

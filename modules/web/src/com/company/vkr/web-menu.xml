@@ -6,5 +6,6 @@
         <item screen="vkr_manage_Shop.browse" caption="mainMsg://menu_config.vkr_manage_Shop.browse"/>
         <item screen="vkr_SalesScreen" caption="mainMsg://menu_config.vkr_SalesScreen"/>
         <item screen="vkr_Purchase.browse" caption="mainMsg://menu_config.vkr_Purchase.browse"/>
+        <item screen="vkr_Shop.earnings" caption="mainMsg://menu_config.vkr_Shop.earnings"/>
     </menu>
 </menu-config>
