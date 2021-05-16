@@ -5,7 +5,9 @@ import com.company.vkr.entity.business.ProductInTheShop;
 import com.company.vkr.entity.business.PurchasedProduct;
 import com.company.vkr.entity.company.ProductCategory;
 import com.company.vkr.entity.network.Shop;
+import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -39,6 +41,9 @@ public class ShopCategoriesScreen extends Screen {
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
+        shopsDl.setParameter("manager", AppBeans.get(UserSessionSource.class).getUserSession().getUser());
+        shopsDl.setParameter("networkCeo", AppBeans.get(UserSessionSource.class).getUserSession().getUser().getLogin());
+
         shopsDl.load();
     }
 

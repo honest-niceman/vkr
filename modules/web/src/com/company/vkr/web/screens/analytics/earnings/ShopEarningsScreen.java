@@ -2,7 +2,9 @@ package com.company.vkr.web.screens.analytics.earnings;
 
 import com.company.vkr.entity.analytics.ShopEarnings;
 import com.company.vkr.entity.business.PurchasedProduct;
+import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -10,6 +12,7 @@ import com.haulmont.cuba.gui.screen.*;
 import com.company.vkr.entity.network.Shop;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -23,19 +26,29 @@ import java.util.*;
 @LookupComponent("shopsTable")
 @LoadDataBeforeShow
 public class ShopEarningsScreen extends StandardLookup<Shop> {
-    private static final Logger log = org.slf4j.LoggerFactory.getLogger(ShopEarningsScreen.class);
+    private static final Logger log = LoggerFactory.getLogger(ShopEarningsScreen.class);
     @Inject
     protected DataManager dataManager;
     @Inject
     private CollectionContainer<ShopEarnings> shopEarningsDc;
     @Inject
     private CollectionLoader<PurchasedProduct> purchasedProductsDl;
+    @Inject
+    private CollectionLoader<Shop> shopsDl;
 
     @Subscribe("shopsTable")
     public void onShopsTableSelection(Table.SelectionEvent<Shop> event) {
         if (!event.getSelected().isEmpty()) {
             drawGraph(event.getSelected().iterator().next());
         }
+    }
+
+    @Subscribe
+    public void onBeforeShow(BeforeShowEvent event) {
+        shopsDl.setParameter("manager", AppBeans.get(UserSessionSource.class).getUserSession().getUser());
+        shopsDl.setParameter("networkCeo", AppBeans.get(UserSessionSource.class).getUserSession().getUser().getLogin());
+
+        shopsDl.load();
     }
 
     private void drawGraph(Shop shop) {

@@ -9,7 +9,7 @@
             <view extends="_local"/>
             <loader id="shopsDl">
                 <query>
-                    <![CDATA[select e from vkr_Shop e]]>
+                    <![CDATA[select e from vkr_Shop e where e.manager = :manager or e.createdBy = :networkCeo]]>
                 </query>
             </loader>
         </collection>
