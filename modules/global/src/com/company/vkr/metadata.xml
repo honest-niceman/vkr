@@ -4,6 +4,7 @@
     <metadata-model root-package="com.company.vkr" namespace="vkr">
         <class>com.company.vkr.entity.analytics.ShopStatistic</class>
         <class>com.company.vkr.entity.analytics.ShopEarnings</class>
+        <class>com.company.vkr.entity.analytics.ShopCategories</class>
     </metadata-model>
 
 </metadata>

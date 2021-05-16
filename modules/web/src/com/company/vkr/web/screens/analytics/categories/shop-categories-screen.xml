@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd"
+        caption="msg://shopCategoriesScreen.caption"
+        messagesPack="com.company.vkr.web.screens.analytics.categories">
+    <data readOnly="true">
+        <collection id="shopsDc"
+                    class="com.company.vkr.entity.network.Shop">
+            <view extends="_local"/>
+            <loader id="shopsDl">
+                <query>
+                    <![CDATA[select e from vkr_Shop e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="purchasedProductsDc"
+                    class="com.company.vkr.entity.business.PurchasedProduct">
+            <view extends="_local">
+                <property name="productInTheShop" view="_minimal">
+                    <property name="price"/>
+                    <property name="product" view="_minimal">
+                        <property name="price"/>
+                        <property name="category" view="_minimal"/>
+                    </property>
+                </property>
+                <property name="purchase" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
+            </view>
+            <loader id="purchasedProductsDl">
+                <query>
+                    <![CDATA[select e from vkr_PurchasedProduct e]]>
+                </query>
+            </loader>
+        </collection>
+
+        <collection id="shopCategoriesDc"
+                    class="com.company.vkr.entity.analytics.ShopCategories"
+                    view="_local"/>
+    </data>
+    <layout expand="grid">
+        <filter id="filter"
+                applyTo="shopsTable"
+                dataLoader="shopsDl">
+            <properties include=".*"/>
+        </filter>
+        <grid id="grid" width="100%" >
+            <columns count="2"/>
+            <rows>
+                <row>
+                    <groupTable id="shopsTable"
+                                dataContainer="shopsDc"
+                                width="200px"
+                                height="700px">
+                        <columns>
+                            <column id="name"/>
+                        </columns>
+                        <rowsCount/>
+                    </groupTable>
+
+                    <chart:pieChart id="pieChart"
+                                    dataContainer="shopCategoriesDc"
+                                    titleField="productCategory"
+                                    valueField="purchasedNumber"
+                                    height="800px"
+                                    width="1000px">
+                        <chart:legend autoMargins="false"
+                                      marginRight="80"
+                                      markerType="CIRCLE"
+                                      position="RIGHT"/>
+                        <chart:balloon fixedPosition="true"/>
+                        <chart:export/>
+                    </chart:pieChart>
+                </row>
+            </rows>
+        </grid>
+    </layout>
+</window>
