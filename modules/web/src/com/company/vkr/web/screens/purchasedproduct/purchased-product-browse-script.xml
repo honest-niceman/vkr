@@ -24,6 +24,7 @@
     <layout expand="purchasedProductsTable"
             spacing="true">
         <textArea id="textArea"/>
+        <button id="btn"/>
         <filter id="filter"
                 applyTo="purchasedProductsTable"
                 dataLoader="purchasedProductsDl">

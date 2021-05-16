@@ -15,8 +15,10 @@ import com.company.vkr.entity.business.Purchase;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @UiController("vkr_Purchase.edit")
 @UiDescriptor("purchase-edit.xml")
@@ -58,49 +60,61 @@ public class PurchaseEdit extends StandardEditor<Purchase> {
 
     private void generatePurchasedProducts(){
         productsInTheShopDl.load();
-        List<ProductInTheShop> productInTheShopList = productsInTheShopDl.getContainer().getItems();
-        int productInTheShopListSize = productInTheShopList.size();
-
-        int numberOfPurchasedProducts = 1 + random.nextInt(12);
 
         CommitContext commitContext = new CommitContext();
 
-        BigDecimal totalPrice = BigDecimal.ZERO;
+        for (int i = 0; i < 1000; i++) {
+            Purchase purchase = dataManager.create(Purchase.class);
+            List<ProductInTheShop> productInTheShopList = productsInTheShopDl.getContainer().getItems();
+            int productInTheShopListSize = productInTheShopList.size();
 
-        for (int i = 0; i < numberOfPurchasedProducts; i++) {
-            ProductInTheShop productInTheShop = productInTheShopList.get(random.nextInt(productInTheShopListSize));
+            int numberOfPurchasedProducts = 1 + random.nextInt(12);
 
-            int purchasedCount = 0;
+            BigDecimal totalPrice = BigDecimal.ZERO;
 
-            if(productInTheShop.getCount()>10_000){
-                purchasedCount = productInTheShop.getCount() / (200 + random.nextInt(50));
-            } else  if(productInTheShop.getCount()>1_000){
-                purchasedCount = productInTheShop.getCount() / (30 + random.nextInt(20));
-            } else if(productInTheShop.getCount()>100){
-                purchasedCount = productInTheShop.getCount() / (5 + random.nextInt(10));
-            } else if(productInTheShop.getCount()>10) {
-                purchasedCount = productInTheShop.getCount() / 2;
-            } else {
-                purchasedCount = productInTheShop.getCount();
+            for (int j = 0; j < numberOfPurchasedProducts; j++) {
+                ProductInTheShop productInTheShop = productInTheShopList.get(random.nextInt(productInTheShopListSize));
+
+                int purchasedCount = 0;
+
+                if(productInTheShop.getCount()>10_000){
+                    purchasedCount = productInTheShop.getCount() / (200 + random.nextInt(50));
+                } else  if(productInTheShop.getCount()>1_000){
+                    purchasedCount = productInTheShop.getCount() / (30 + random.nextInt(20));
+                } else if(productInTheShop.getCount()>100){
+                    purchasedCount = productInTheShop.getCount() / (5 + random.nextInt(10));
+                } else if(productInTheShop.getCount()>10) {
+                    purchasedCount = productInTheShop.getCount() / 2;
+                } else {
+                    purchasedCount = productInTheShop.getCount();
+                }
+
+                PurchasedProduct purchasedProduct = dataManager.create(PurchasedProduct.class);
+                purchasedProduct.setShop(productInTheShop.getShop());
+                purchasedProduct.setCount(purchasedCount);
+                purchasedProduct.setPrice(productInTheShop.getPrice());
+                purchasedProduct.setPurchase(purchase);
+                purchasedProduct.setProductInTheShop(productInTheShop);
+                purchasedProduct.setPositionPrice(purchasedProduct.getPrice().multiply(BigDecimal.valueOf(purchasedProduct.getCount())));
+
+                totalPrice = totalPrice.add(purchasedProduct.getPrice().multiply(BigDecimal.valueOf(purchasedProduct.getCount())));
+
+                commitContext.addInstanceToCommit(purchasedProduct);
             }
 
-            PurchasedProduct purchasedProduct = dataManager.create(PurchasedProduct.class);
-            purchasedProduct.setShop(productInTheShop.getShop());
-            purchasedProduct.setCount(purchasedCount);
-            purchasedProduct.setPrice(productInTheShop.getPrice());
-            purchasedProduct.setPurchase(getEditedEntity());
-            purchasedProduct.setProductInTheShop(productInTheShop);
-            purchasedProduct.setPositionPrice(purchasedProduct.getPrice().multiply(BigDecimal.valueOf(purchasedProduct.getCount())));
+            String date_01_01_2020 = "1577822400000";
+            String date_31_01_2020 = "1580414400000";
 
-            totalPrice = totalPrice.add(purchasedProduct.getPrice().multiply(BigDecimal.valueOf(purchasedProduct.getCount())));
+            Date randomDate = new Date(ThreadLocalRandom.current()
+                    .nextLong(Long.parseLong(date_01_01_2020), Long.parseLong(date_31_01_2020)));
 
-            commitContext.addInstanceToCommit(purchasedProduct);
+            purchase.setDate(randomDate);
+
+            purchase.setCustomer(AppBeans.get(UserSessionSource.class).getUserSession().getUser());
+            purchase.setTotalPrice(totalPrice);
+            commitContext.addInstanceToCommit(purchase);
         }
 
-        getEditedEntity().setDate(AppBeans.get(TimeSource.class).currentTimestamp());
-        getEditedEntity().setCustomer(AppBeans.get(UserSessionSource.class).getUserSession().getUser());
-        getEditedEntity().setTotalPrice(totalPrice);
-        commitContext.addInstanceToCommit(getEditedEntity());
         dataManager.commit(commitContext);
     }
 
