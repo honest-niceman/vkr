@@ -8,5 +8,6 @@
         <item screen="vkr_Purchase.browse" caption="mainMsg://menu_config.vkr_Purchase.browse"/>
         <item screen="vkr_Shop.earnings" caption="mainMsg://menu_config.vkr_Shop.earnings"/>
         <item screen="vkr_ShopCategoriesScreen" caption="mainMsg://menu_config.vkr_ShopCategoriesScreen"/>
+        <item screen="sec$UserManager.browse" caption="mainMsg://menu_config.sec$UserManager.browse"/>
     </menu>
 </menu-config>

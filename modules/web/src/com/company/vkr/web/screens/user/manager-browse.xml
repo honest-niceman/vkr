@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://managerBrowse.caption"
+        focusComponent="usersTable"
+        messagesPack="com.company.vkr.web.screens.user">
+    <data readOnly="true">
+        <collection id="usersDc"
+                    class="com.haulmont.cuba.security.entity.User">
+            <view extends="_minimal">
+                <property name="password"/>
+                <property name="passwordEncryption"/>
+                <property name="firstName"/>
+                <property name="lastName"/>
+                <property name="email"/>
+                <property name="language"/>
+                <property name="changePasswordAtNextLogon"/>
+                <property name="userRoles" view="_minimal">
+                    <property name="user" view="_minimal"/>
+                    <property name="role" view="_minimal"/>
+                    <property name="roleName"/>
+                </property>
+            </view>
+            <loader id="usersDl">
+                <query>
+                    <![CDATA[select e from sec$User e where e.createdBy = :networkCeo]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="usersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="usersTable"
+                dataLoader="usersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="usersTable"
+                    width="100%"
+                    dataContainer="usersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="login"/>
+                <column id="firstName"/>
+                <column id="lastName"/>
+                <column id="email"/>
+                <column id="changePasswordAtNextLogon"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="usersTable.create"/>
+                <button id="editBtn" action="usersTable.edit"/>
+                <button id="removeBtn" action="usersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

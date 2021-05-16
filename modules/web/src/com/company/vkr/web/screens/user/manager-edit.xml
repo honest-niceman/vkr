@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://managerEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.vkr.web.screens.user">
+    <data>
+        <instance id="userDc"
+                  class="com.haulmont.cuba.security.entity.User">
+            <view extends="_minimal">
+                <property name="password"/>
+                <property name="passwordEncryption"/>
+                <property name="firstName"/>
+                <property name="lastName"/>
+                <property name="email"/>
+                <property name="changePasswordAtNextLogon"/>
+                <property name="userRoles" view="_minimal">
+                    <property name="user" view="_minimal"/>
+                    <property name="role" view="_minimal"/>
+                    <property name="roleName"/>
+                </property>
+            </view>
+            <loader/>
+            <collection id="userRolesDc" property="userRoles"/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="userDc">
+            <column width="350px">
+                <textField id="loginField" property="login" required="true"/>
+                <textField id="firstNameField" property="firstName" required="true"/>
+                <textField id="lastNameField" property="lastName" required="true"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
