@@ -6,10 +6,16 @@
     <data readOnly="true">
         <collection id="purchasedProductsDc"
                     class="com.company.vkr.entity.business.PurchasedProduct">
-            <view extends="purchasedProduct-view-shop"/>
+            <view extends="purchasedProduct-view-shop" systemProperties="true">
+                <property name="shop" view="shop-view">
+                    <property name="network" view="_minimal">
+                        <property name="networkCeo" view="_minimal"/>
+                    </property>
+                </property>
+            </view>
             <loader id="purchasedProductsDl">
                 <query>
-                    <![CDATA[select e from vkr_PurchasedProduct e]]>
+                    <![CDATA[select e from vkr_PurchasedProduct e where e.shop.network.networkCeo = :networkCeo]]>
                 </query>
             </loader>
         </collection>

@@ -5,7 +5,9 @@ import com.company.vkr.entity.business.PurchasedProduct;
 import com.company.vkr.entity.network.Shop;
 import com.haulmont.charts.gui.components.charts.SerialChart;
 import com.haulmont.charts.gui.data.MapDataItem;
+import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.Screen;
@@ -32,15 +34,16 @@ public class SalesScreen extends Screen {
     private CollectionContainer<ShopStatistic> shopStatisticDc;
 
     @Subscribe
-    public void onBeforeShow(BeforeShowEvent event) {;
-    purchasedProductsDl.load();
+    public void onBeforeShow(BeforeShowEvent event) {
+        purchasedProductsDl.setParameter("networkCeo", AppBeans.get(UserSessionSource.class).getUserSession().getUser());
+        purchasedProductsDl.load();
         Map<Shop, IntSummaryStatistics> map = purchasedProductsDl.getContainer().getItems().stream()
                 .collect(Collectors.groupingBy(PurchasedProduct::getShop, Collectors.summarizingInt(PurchasedProduct::getCount)));
 
         List<ShopStatistic> shopStatisticList = new ArrayList<>();
 
         for (Map.Entry<Shop, IntSummaryStatistics> entry : map.entrySet()) {
-            shopStatisticList.add(shopStatistic(entry.getKey(),entry.getValue().getSum()));
+            shopStatisticList.add(shopStatistic(entry.getKey(), entry.getValue().getSum()));
         }
 
         shopStatisticDc.setItems(shopStatisticList);

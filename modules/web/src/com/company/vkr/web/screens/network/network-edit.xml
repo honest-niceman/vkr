@@ -27,8 +27,7 @@
             <column width="350px">
                 <textField id="nameField" property="name"/>
                 <pickerField id="networkCeoField"
-                           property="networkCeo"
-                           editable="false">
+                           property="networkCeo">
                 </pickerField>
             </column>
         </form>

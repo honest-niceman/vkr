@@ -32,8 +32,6 @@ public class NetworkEdit extends StandardEditor<Network> {
     public void onBeforeShow(BeforeShowEvent event) {
         shopsDl.setParameter("network", getEditedEntity());
         shopsDl.load();
-
-        getEditedEntity().setNetworkCeo(AppBeans.get(UserSessionSource.class).getUserSession().getUser());
     }
 
     @Subscribe("createBtn")

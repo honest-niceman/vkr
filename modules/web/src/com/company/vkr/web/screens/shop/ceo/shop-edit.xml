@@ -8,7 +8,7 @@
 
         <instance id="shopDc"
                   class="com.company.vkr.entity.network.Shop">
-            <view extends="_local">
+            <view extends="shop-view">
                 <property name="address" view="_minimal">
                 </property>
                 <property name="manager" view="_minimal">
