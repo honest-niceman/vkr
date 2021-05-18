@@ -4,10 +4,12 @@
         <item screen="vkr_Network.browse" caption="mainMsg://menu_config.vkr_Network.browse"/>
         <item screen="vkr_Company.browse" caption="mainMsg://menu_config.vkr_Company.browse"/>
         <item screen="vkr_manage_Shop.browse" caption="mainMsg://menu_config.vkr_manage_Shop.browse"/>
-        <item screen="vkr_SalesScreen" caption="mainMsg://menu_config.vkr_SalesScreen"/>
         <item screen="vkr_Purchase.browse" caption="mainMsg://menu_config.vkr_Purchase.browse"/>
+        <item screen="sec$UserManager.browse" caption="mainMsg://menu_config.sec$UserManager.browse"/>
+    </menu>
+    <menu id="analytics" caption="mainMsg://menu_config.analytics" insertBefore="administration">
         <item screen="vkr_Shop.earnings" caption="mainMsg://menu_config.vkr_Shop.earnings"/>
         <item screen="vkr_ShopCategoriesScreen" caption="mainMsg://menu_config.vkr_ShopCategoriesScreen"/>
-        <item screen="sec$UserManager.browse" caption="mainMsg://menu_config.sec$UserManager.browse"/>
+        <item screen="vkr_SalesScreen" caption="mainMsg://menu_config.vkr_SalesScreen"/>
     </menu>
 </menu-config>

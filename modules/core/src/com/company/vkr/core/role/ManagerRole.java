@@ -24,9 +24,7 @@ import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
 public class ManagerRole extends AnnotatedRoleDefinition {
     public final static String NAME = "ManagerRole";
 
-    @ScreenAccess(screenIds = {"application-vkr", "vkr_manage_Shop.browse", "vkr_Shop.earnings",
-            "vkr_ShopCategoriesScreen", "aboutWindow", "help", "settings", "vkr_manager_Shop.edit", "vkr_Address.edit",
-            "vkr_ProductInTheShop.browse", "vkr_ProductInTheShop.edit", "vkr_Shop.edit", "sec$User.changePassword"})
+    @ScreenAccess(screenIds = {"application-vkr", "vkr_manage_Shop.browse", "vkr_Shop.earnings", "vkr_ShopCategoriesScreen", "aboutWindow", "help", "settings", "vkr_manager_Shop.edit", "vkr_Address.edit", "vkr_ProductInTheShop.browse", "vkr_ProductInTheShop.edit", "vkr_Shop.edit", "sec$User.changePassword", "analytics"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();
