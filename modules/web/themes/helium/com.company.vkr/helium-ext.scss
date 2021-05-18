@@ -1,4 +1,69 @@
 /* Define your theme modifications inside next mixin */
 @mixin com_company_vkr-helium-ext {
+  --white: #FFFFFF;
+  --white_rgb: 255, 255, 255;
 
+  /* Basic */
+  --primary-color: #867AEB;
+  --primary-color_rgb: 134, 122, 235;
+
+  --secondary-color: #FFD042;
+  --secondary-color_rgb: 255, 208, 66;
+  --success-color: #83C93C;
+
+  /* Common */
+  --primary-color-shade-1: #6A5CE6;
+  --primary-color-shade-2: #4D3DE1;
+  --primary-dim-color: #AAA2F1;
+  --secondary-color-shade-1: #FFC61A;
+  --secondary-color-shade-2: #FABB00;
+  --secondary-contrast-text-color: #2C3436;
+  --secondary-dim-color: #FFDD75;
+  --success-color-shade-1: #75B332;
+  --success-color-shade-2: #689F2D;
+  --success-dim-color: #A7D874;
+
+  /* SideMenu */
+  --dark-purple: #584CAE;
+  --main-menu-purple: #6356C0;
+
+  --sidemenu-background-color: var(--main-menu-purple);
+  --sidemenu-text-color: var(--white);
+
+  --sidemenu-title-color: var(--sidemenu-text-color);
+  --sidemenu-title-background-color: var(--dark-purple);
+
+  --sidemenu-item-focused-color: var(--white);
+
+  --sedemenu-item-selected-color: var(--secondary-dim-color);
+  --sedemenu-item-selected-background-color: none;
+
+  --sidemenu-item-badge-color: var(--secondary-contrast-text-color);
+  --sidemenu-item-badge-background-color: var(--secondary-color);
+
+
+  --sidemenu-collapsible-submenu-background-color: none;
+
+  --sidemenu-collapsible-controls-panel-background-color: var(--dark-purple);
+
+  --sidemenu-collapsible-action-button-color: var(--white);
+  --sidemenu-collapsible-action-button-hover-background-color: var(--primary-color);
+  --sidemenu-collapsible-action-button-active-background-color: var(--primary-color);
+
+  --sidemenu-collapsible-collapse-button-color: var(--white);
+  --sidemenu-collapsible-collapse-button-background-color: var(--dark-purple);
+  --sidemenu-collapsible-collapse-button-hover-background-color: var(--primary-color);
+  --sidemenu-collapsible-collapse-button-active-background-color: var(--primary-color);
+
+  --groupbox-collapsed-caption-color: var(--white);
+
+
+  /* Table */
+  --table-hovered-row-background-color: #DFDBFD;
+  --table-selected-row-background-color: #DFDBFD;
+  --table-selected-row-border-color: #DFDBFD;
+  --table-selected-row-text-color: var(--text-main-color);
+
+  /* Tooltip */
+  --tooltip-font-color: var(--secondary-contrast-text-color);
 }
