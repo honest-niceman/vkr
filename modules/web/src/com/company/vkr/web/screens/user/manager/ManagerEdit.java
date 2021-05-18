@@ -1,8 +1,7 @@
-package com.company.vkr.web.screens.user;
+package com.company.vkr.web.screens.user.manager;
 
 import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.gui.components.TextField;
-import com.haulmont.cuba.gui.model.DataContext;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.security.entity.Group;
 import com.haulmont.cuba.security.entity.Role;
