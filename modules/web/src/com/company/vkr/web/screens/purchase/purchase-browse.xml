@@ -11,11 +11,7 @@
                 <property name="purchasedProducts" view="_minimal"/>
                 <property name="customer" view="_minimal"/>
             </view>
-            <loader id="purchasesDl">
-                <query>
-                    <![CDATA[select e from vkr_Purchase e]]>
-                </query>
-            </loader>
+            <loader id="purchasesDl"/>
         </collection>
     </data>
     <dialogMode height="600"
