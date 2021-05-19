@@ -11,28 +11,54 @@ import com.company.vkr.entity.company.ProductCategory;
 import com.company.vkr.entity.network.Address;
 import com.company.vkr.entity.network.Shop;
 import com.haulmont.cuba.security.app.role.AnnotatedRoleDefinition;
-import com.haulmont.cuba.security.app.role.annotation.EntityAccess;
-import com.haulmont.cuba.security.app.role.annotation.EntityAttributeAccess;
-import com.haulmont.cuba.security.app.role.annotation.Role;
-import com.haulmont.cuba.security.app.role.annotation.ScreenAccess;
+import com.haulmont.cuba.security.app.role.annotation.*;
 import com.haulmont.cuba.security.entity.EntityOp;
 import com.haulmont.cuba.security.role.EntityAttributePermissionsContainer;
 import com.haulmont.cuba.security.role.EntityPermissionsContainer;
 import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
+import com.haulmont.cuba.security.role.SpecificPermissionsContainer;
 
 @Role(name = ManagerRole.NAME)
 public class ManagerRole extends AnnotatedRoleDefinition {
-    public final static String NAME = "ManagerRole";
+    public final static String NAME = "manager";
 
-    @ScreenAccess(screenIds = {"application-vkr", "vkr_manage_Shop.browse", "vkr_Shop.earnings", "vkr_ShopCategoriesScreen", "aboutWindow", "help", "settings", "vkr_manager_Shop.edit", "vkr_Address.edit", "vkr_ProductInTheShop.browse", "vkr_ProductInTheShop.edit", "vkr_Shop.edit", "sec$User.changePassword", "analytics"})
+    @ScreenAccess(screenIds = {
+            "application-vkr",
+            "vkr_manage_Shop.browse",
+            "vkr_Shop.earnings",
+            "vkr_ShopCategoriesScreen",
+            "vkr_manager_Shop.edit",
+            "vkr_Address.edit",
+            "vkr_ProductInTheShop.browse",
+            "vkr_ProductInTheShop.edit",
+            "vkr_Shop.edit",
+            "sec$User.changePassword",
+            "aboutWindow",
+            "help",
+            "settings",
+            "analytics",
+            "main",
+            "mainWindow"
+    })
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();
     }
 
+    @SpecificAccess(permissions = {
+            "cuba.gui.filter.customConditions",
+            "cuba.gui.filter.edit",
+            "cuba.gui.filter.global",
+            "cuba.gui.filter.maxResults"
+    })
+    @Override
+    public SpecificPermissionsContainer specificPermissions() {
+        return super.specificPermissions();
+    }
+
     @EntityAccess(entityClass = Address.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE, EntityOp.READ})
     @EntityAccess(entityClass = Shop.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE, EntityOp.READ})
-    @EntityAccess(entityClass = ProductInTheShop.class, operations = EntityOp.READ)
+    @EntityAccess(entityClass = ProductInTheShop.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE, EntityOp.READ})
     @EntityAccess(entityClass = ShopCategories.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE, EntityOp.READ})
     @EntityAccess(entityClass = ShopEarnings.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE, EntityOp.READ})
     @EntityAccess(entityClass = PurchasedProduct.class, operations = {EntityOp.READ})

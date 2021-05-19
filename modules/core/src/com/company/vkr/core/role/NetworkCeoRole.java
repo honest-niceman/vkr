@@ -3,23 +3,21 @@ package com.company.vkr.core.role;
 import com.company.vkr.entity.analytics.ShopStatistic;
 import com.company.vkr.entity.network.Network;
 import com.haulmont.cuba.security.app.role.AnnotatedRoleDefinition;
-import com.haulmont.cuba.security.app.role.annotation.EntityAccess;
-import com.haulmont.cuba.security.app.role.annotation.EntityAttributeAccess;
-import com.haulmont.cuba.security.app.role.annotation.Role;
-import com.haulmont.cuba.security.app.role.annotation.ScreenAccess;
+import com.haulmont.cuba.security.app.role.annotation.*;
 import com.haulmont.cuba.security.entity.EntityOp;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.cuba.security.role.EntityAttributePermissionsContainer;
 import com.haulmont.cuba.security.role.EntityPermissionsContainer;
 import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
+import com.haulmont.cuba.security.role.SpecificPermissionsContainer;
 
 //use manager role with this role to configure networkCeo correctly
 @Role(name = NetworkCeoRole.NAME)
 public class NetworkCeoRole extends AnnotatedRoleDefinition {
-    public final static String NAME = "NetworkCeo";
+    public final static String NAME = "network-ceo";
 
-    @ScreenAccess(screenIds = {"vkr_Network.browse", "vkr_SalesScreen", "vkr_Network.edit"})
+    @ScreenAccess(screenIds = {"vkr_Network.browse", "vkr_SalesScreen", "vkr_Network.edit", "sec$UserManager.browse", "application-vkr", "sec$UserManager.edit"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();

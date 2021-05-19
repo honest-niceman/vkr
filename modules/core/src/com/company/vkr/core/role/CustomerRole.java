@@ -6,24 +6,44 @@ import com.company.vkr.entity.business.PurchasedProduct;
 import com.company.vkr.entity.network.Network;
 import com.company.vkr.entity.network.Shop;
 import com.haulmont.cuba.security.app.role.AnnotatedRoleDefinition;
-import com.haulmont.cuba.security.app.role.annotation.EntityAccess;
-import com.haulmont.cuba.security.app.role.annotation.EntityAttributeAccess;
-import com.haulmont.cuba.security.app.role.annotation.Role;
-import com.haulmont.cuba.security.app.role.annotation.ScreenAccess;
+import com.haulmont.cuba.security.app.role.annotation.*;
 import com.haulmont.cuba.security.entity.EntityOp;
 import com.haulmont.cuba.security.role.EntityAttributePermissionsContainer;
 import com.haulmont.cuba.security.role.EntityPermissionsContainer;
 import com.haulmont.cuba.security.role.ScreenPermissionsContainer;
+import com.haulmont.cuba.security.role.SpecificPermissionsContainer;
 
 @Role(name = CustomerRole.NAME)
 public class CustomerRole extends AnnotatedRoleDefinition {
-    public final static String NAME = "Customer";
+    public final static String NAME = "customer";
 
-    @ScreenAccess(screenIds = {"vkr_Purchase.browse", "application-vkr", "vkr_PurchasedProduct.edit",
-            "vkr_Purchase.edit", "vkr_ProductInTheShop.browse"})
+    @ScreenAccess(screenIds = {
+            "vkr_Purchase.browse",
+            "application-vkr",
+            "vkr_PurchasedProduct.edit",
+            "vkr_Purchase.edit",
+            "vkr_ProductInTheShop.browse",
+            "aboutWindow",
+            "help",
+            "settings",
+            "analytics",
+            "main",
+            "mainWindow"
+    })
     @Override
     public ScreenPermissionsContainer screenPermissions() {
         return super.screenPermissions();
+    }
+
+    @SpecificAccess(permissions = {
+            "cuba.gui.filter.customConditions",
+            "cuba.gui.filter.edit",
+            "cuba.gui.filter.global",
+            "cuba.gui.filter.maxResults"
+    })
+    @Override
+    public SpecificPermissionsContainer specificPermissions() {
+        return super.specificPermissions();
     }
 
     @EntityAccess(entityClass = Purchase.class, operations = {EntityOp.CREATE, EntityOp.UPDATE, EntityOp.DELETE, EntityOp.READ})
