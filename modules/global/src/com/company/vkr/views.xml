@@ -63,4 +63,9 @@
         <property name="productInTheShop" view="_minimal"/>
         <property name="shop" view="shop-view"/>
     </view>
+    <view entity="sec$User" name="user-view" extends="_local">
+        <property name="userRoles" view="_minimal">
+            <property name="roleName"/>
+        </property>
+    </view>
 </views>
