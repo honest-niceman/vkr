@@ -5,7 +5,8 @@
         <item screen="vkr_Company.browse" caption="mainMsg://menu_config.vkr_Company.browse"/>
         <item screen="vkr_manage_Shop.browse" caption="mainMsg://menu_config.vkr_manage_Shop.browse"/>
         <item screen="vkr_Purchase.browse" caption="mainMsg://menu_config.vkr_Purchase.browse"/>
-        <item screen="vkr_ProductInTheShopForScript.browse" caption="mainMsg://menu_config.vkr_ProductInTheShopForScript.browse"/>
-        <item screen="vkr_PurchasedProductScript.browse" caption="mainMsg://menu_config.vkr_PurchasedProductScript.browse"/>
+        <item screen="vkr_RandomPurchasesGeneratorScreen" caption="mainMsg://menu_config.vkr_RandomPurchasesGeneratorScreen"/>
+    </menu>
+    <menu id="analytics" caption="mainMsg://menu_config.analytics" insertBefore="administration">
     </menu>
 </menu-config>

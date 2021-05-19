@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://randomPurchasesGeneratorScreen.caption"
+        messagesPack="com.company.vkr.web.screens.purchase.randomdata">
+    <data>
+        <collection id="productsInTheShopDc"
+                    class="com.company.vkr.entity.business.ProductInTheShop">
+            <view extends="_local"/>
+            <loader id="productsInTheShopDl">
+                <query>
+                    <![CDATA[select e from vkr_ProductInTheShop e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <layout>
+        <button id="btn"/>
+    </layout>
+</window>
