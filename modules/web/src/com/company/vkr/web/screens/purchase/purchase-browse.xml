@@ -13,6 +13,19 @@
             </view>
             <loader id="purchasesDl"/>
         </collection>
+        <collection id="purchasedProductsDc"
+                    class="com.company.vkr.entity.business.PurchasedProduct">
+            <view extends="_local">
+                <property name="productInTheShop" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
+                <property name="purchase" view="_minimal"/>
+            </view>
+            <loader id="purchasedProductsDl">
+                <query>
+                    <![CDATA[select e from vkr_PurchasedProduct e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>

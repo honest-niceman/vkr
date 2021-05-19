@@ -42,12 +42,12 @@
                         <action id="clear" type="picker_clear"/>
                     </actions>
                 </suggestionPickerField>
-                <textField id="priceField" property="price">
+                <textField id="priceField" property="price" required="true">
                     <validators>
                         <positive/>
                     </validators>
                 </textField>
-                <textField id="countField" property="count">
+                <textField id="countField" property="count" required="true">
                     <validators>
                         <positive/>
                     </validators>

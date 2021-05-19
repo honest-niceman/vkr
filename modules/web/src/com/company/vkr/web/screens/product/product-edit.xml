@@ -22,7 +22,8 @@
         </collection>
     </data>
     <dialogMode height="AUTO"
-                width="AUTO"/>
+                width="AUTO"
+                forceDialog="true"/>
     <layout expand="editActions" spacing="true">
         <form id="form" dataContainer="productDc">
             <column width="350px">

@@ -24,7 +24,7 @@ public class ManagerShopBrowse extends StandardLookup<Shop> {
     public void onInit(InitEvent event) {
         shopsTableEdit.setScreenClass(ManagerShopEdit.class);
 
-        shopsDl.setParameter("networkCeo",AppBeans.get(UserSessionSource.class).getUserSession().getUser().getLogin());
+        shopsDl.setParameter("networkCeo",AppBeans.get(UserSessionSource.class).getUserSession().getUser());
         shopsDl.setParameter("manager", AppBeans.get(UserSessionSource.class).getUserSession().getUser());
     }
 

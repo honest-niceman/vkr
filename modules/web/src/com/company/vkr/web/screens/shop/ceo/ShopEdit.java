@@ -1,7 +1,9 @@
 package com.company.vkr.web.screens.shop.ceo;
 
 import com.company.vkr.entity.network.Address;
+import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.MetadataTools;
+import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.components.SuggestionPickerField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
@@ -53,13 +55,14 @@ public class ShopEdit extends StandardEditor<Shop> {
     }
 
     public void managersLoaderSearchExecutor(){
-        //todo change query to select users with role manager
-        //UUID managerGroup = UUID.fromString("daed0d15-c513-c70b-2893-a67ca0895522"); // manager group id
-        UUID managerGroup = UUID.fromString("0fa2b1a5-1d68-4d69-9fbd-dff348347f93"); // company group id, just for testing
-        managersLoader.setQuery("select u from sec$User u where u.group.id = :group");
-        managersLoader.setParameter("group",managerGroup);
+        managersLoader.setQuery("select u from sec$User u where u.createdBy = :networkCeo");
+        managersLoader.setParameter("networkCeo", AppBeans.get(UserSessionSource.class).getUserSession().getUser().getLogin());
         managersLoader.load();
-        List<User> managers = new ArrayList<>(managersDc.getItems());
+        List<User> users = new ArrayList<>(managersDc.getItems());
+        List<User> managers = users.stream().filter(x -> x.getUserRoles()
+                        .stream().anyMatch(y -> y.getRoleName().equals("manager")))
+                .collect(Collectors.toList());
+
         managerField.setSearchExecutor((searchString, searchParams) ->
                 managers.stream()
                         .filter(user ->

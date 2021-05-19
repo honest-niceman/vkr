@@ -46,9 +46,13 @@ public class ShopEarningsScreen extends StandardLookup<Shop> {
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         shopsDl.setParameter("manager", AppBeans.get(UserSessionSource.class).getUserSession().getUser());
-        shopsDl.setParameter("networkCeo", AppBeans.get(UserSessionSource.class).getUserSession().getUser().getLogin());
+        shopsDl.setParameter("networkCeo", AppBeans.get(UserSessionSource.class).getUserSession().getUser());
 
         shopsDl.load();
+
+        if(shopsDl.getContainer().getItems().size()!=0){
+            drawGraph(shopsDl.getContainer().getItems().get(0));
+        }
     }
 
     private void drawGraph(Shop shop) {

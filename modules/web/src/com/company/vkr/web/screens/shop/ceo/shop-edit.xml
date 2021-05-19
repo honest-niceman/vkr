@@ -22,18 +22,18 @@
             <instance id="addressDc" property="address"/>
         </instance>
 
+        <collection id="managersDc"
+                    class="com.haulmont.cuba.security.entity.User"
+                    view="user-view">
+            <loader id="managersLoader"/>
+        </collection>
+
         <collection id="addressesDc"
                     class="com.company.vkr.entity.network.Address"
                     view="_local">
             <loader id="addressesLoader">
                 <query><![CDATA[select c from vkr_Address c]]></query>
             </loader>
-        </collection>
-
-        <collection id="managersDc"
-                    class="com.haulmont.cuba.security.entity.User"
-                    view="_local">
-            <loader id="managersLoader"/>
         </collection>
 
     </data>

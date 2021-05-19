@@ -36,10 +36,10 @@ public class ProductInTheShopEdit extends StandardEditor<ProductInTheShop> {
     private Notifications notifications;
     @Inject
     private CollectionLoader<Product> productsDl;
-
-    private Integer oldCount;
     @Inject
     private DataManager dataManager;
+
+    private Integer oldCount;
 
     @Subscribe
     public void onInit(InitEvent event) {

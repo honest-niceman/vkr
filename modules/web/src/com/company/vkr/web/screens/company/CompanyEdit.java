@@ -53,7 +53,4 @@ public class CompanyEdit extends StandardEditor<Company> {
                 .build()
                 .show();
     }
-
-
-
 }
