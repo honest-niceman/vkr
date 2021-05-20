@@ -13,6 +13,7 @@ public class VkrTestContainer extends TestContainer {
         //noinspection ArraysAsListWithZeroOrOneArgument
         appComponents = Arrays.asList(
                 "com.haulmont.cuba",
+                "com.haulmont.addon.helium",
                 "com.haulmont.charts");
         appPropertiesFiles = Arrays.asList(
                 // List the files defined in your web.xml
